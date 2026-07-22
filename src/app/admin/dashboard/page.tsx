@@ -419,10 +419,24 @@ export default function AdminDashboard() {
                               {o.id.slice(0, 10)}...
                             </td>
 
-                            {/* User */}
+                            {/* User Details & Payout UPI */}
                             <td className="py-3.5 px-4">
                               <div className="font-bold text-white text-xs capitalize">{o.user?.name || 'User'}</div>
                               <div className="text-[10px] text-[#64748b] font-mono">{o.user?.email || o.user?.phone || o.userId.slice(0, 12)}</div>
+                              {payoutUpi && (
+                                <div className="mt-1 flex items-center gap-1.5">
+                                  <span className="text-[10px] font-black text-[#00f2fe] bg-[#00f2fe]/15 px-2 py-0.5 rounded border border-[#00f2fe]/30 font-mono select-all">
+                                    UPI: {payoutUpi}
+                                  </span>
+                                  <button
+                                    onClick={() => copyToClipboard(payoutUpi, 'UPI ID')}
+                                    className="p-1 rounded bg-[#00f2fe] text-black hover:bg-white transition-all shadow-sm"
+                                    title="Copy Payout UPI ID"
+                                  >
+                                    <Copy size={11} />
+                                  </button>
+                                </div>
+                              )}
                             </td>
 
                             {/* Type */}
