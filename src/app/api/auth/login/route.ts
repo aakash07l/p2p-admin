@@ -7,6 +7,10 @@ export const dynamic = 'force-dynamic';
 const MASTER_ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 const MASTER_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'p2pexchangeadmin';
 
+export async function GET() {
+  return NextResponse.json({ success: true, message: 'Admin login endpoint' });
+}
+
 export async function POST(req: NextRequest) {
   try {
     const { username, password } = await req.json();
@@ -43,8 +47,6 @@ export async function POST(req: NextRequest) {
       }
     });
 
-    // For DB Admins, since password authentication is handled by Privy on the user-facing site,
-    // the master password is used as the universal access key for the admin portal.
     if (user && password === MASTER_ADMIN_PASSWORD) {
       const response = NextResponse.json({ success: true, message: `Logged in as admin: ${user.name || user.id}` });
       const token = signToken(user.privyId);

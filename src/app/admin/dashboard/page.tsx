@@ -206,15 +206,15 @@ export default function AdminDashboard() {
 
   // Filtered Orders Logic
   const filteredOrders = orders.filter((o) => {
-    if (orderFilter === 'PENDING_BUY') return o.status === 'PENDING' && (o.type === 'BUY' || o.type === 'DEPOSIT');
-    if (orderFilter === 'PENDING_SELL') return o.status === 'PENDING' && (o.type === 'SELL' || o.type === 'WITHDRAW');
+    if (orderFilter === 'PENDING_BUY') return (o.status === 'PENDING' || o.status === 'PROCESSING') && (o.type === 'BUY' || o.type === 'DEPOSIT');
+    if (orderFilter === 'PENDING_SELL') return (o.status === 'PENDING' || o.status === 'PROCESSING') && (o.type === 'SELL' || o.type === 'WITHDRAW');
     if (orderFilter === 'COMPLETED') return o.status === 'COMPLETED';
     if (orderFilter === 'FAILED') return o.status === 'FAILED' || o.status === 'CANCELLED';
     return true; // 'ALL'
   });
 
-  const pendingBuyCount = orders.filter((o) => o.status === 'PENDING' && (o.type === 'BUY' || o.type === 'DEPOSIT')).length;
-  const pendingSellCount = orders.filter((o) => o.status === 'PENDING' && (o.type === 'SELL' || o.type === 'WITHDRAW')).length;
+  const pendingBuyCount = orders.filter((o) => (o.status === 'PENDING' || o.status === 'PROCESSING') && (o.type === 'BUY' || o.type === 'DEPOSIT')).length;
+  const pendingSellCount = orders.filter((o) => (o.status === 'PENDING' || o.status === 'PROCESSING') && (o.type === 'SELL' || o.type === 'WITHDRAW')).length;
 
   // Filtered User List
   const filteredUsers = userList.filter((u) => {
@@ -503,7 +503,7 @@ export default function AdminDashboard() {
                             {/* Status */}
                             <td className="py-3.5 px-4">
                               <span className={`text-[9px] px-2.5 py-1 rounded-lg font-black tracking-widest uppercase border ${
-                                o.status === 'PENDING'
+                                (o.status === 'PENDING' || o.status === 'PROCESSING')
                                   ? 'bg-[#f97316]/10 text-[#f97316] border-[#f97316]/20 animate-pulse'
                                   : o.status === 'COMPLETED'
                                   ? 'bg-emerald-500/10 text-emerald-400 border-emerald-500/20'
@@ -523,7 +523,7 @@ export default function AdminDashboard() {
                                 >
                                   <Eye size={14} />
                                 </button>
-                                {o.status === 'PENDING' && (
+                                {(o.status === 'PENDING' || o.status === 'PROCESSING') && (
                                   <>
                                     <button
                                       onClick={() => handleFinalize(o.id, 'APPROVE')}
@@ -806,7 +806,7 @@ export default function AdminDashboard() {
                 )}
               </div>
 
-              {selectedTx.status === 'PENDING' && (
+              {(selectedTx.status === 'PENDING' || selectedTx.status === 'PROCESSING') && (
                 <div className="flex gap-2">
                   <button
                     onClick={() => {

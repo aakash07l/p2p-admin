@@ -51,7 +51,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ success: false, error: 'Transaction not found' }, { status: 404 });
     }
 
-    if (tx.status !== 'PENDING') {
+    if (tx.status !== 'PENDING' && tx.status !== 'PROCESSING') {
       return NextResponse.json({ success: false, error: 'Transaction is already finalized' }, { status: 400 });
     }
 
