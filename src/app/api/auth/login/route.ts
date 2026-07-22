@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { signToken } from '@/lib/auth/adminAuth';
 import prisma from '@/lib/db/prisma';
 
+export const dynamic = 'force-dynamic';
+
 const MASTER_ADMIN_USERNAME = process.env.ADMIN_USERNAME || 'admin';
 const MASTER_ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'p2pexchangeadmin';
 
