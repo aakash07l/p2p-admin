@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #020205;
+  --foreground: #e2e8f0;
+  --surface: #0a0a14;
+  --border: #1e293b;
+  --teal-glow: #00f2fe;
+  --safety-orange: #f97316;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--foreground);
+  font-family: ui-sans-serif, system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Monospace font styling for IDs */
+.font-mono-id {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 0.8rem;
+  letter-spacing: -0.02em;
+}
+
+/* High Contrast Data Tables */
+.table-data-dense th {
+  padding: 8px 12px;
+  font-size: 0.65rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: #64748b;
+  border-bottom: 2px solid #1e293b;
+}
+
+.table-data-dense td {
+  padding: 8px 12px;
+  font-size: 0.75rem;
+  border-bottom: 1px solid #0f172a;
+}
+
+.table-data-dense tr:hover {
+  background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Custom glow tags */
+.glow-tag-pending {
+  color: var(--safety-orange);
+  background-color: rgba(249, 115, 22, 0.08);
+  border: 1px solid rgba(249, 115, 22, 0.25);
+  box-shadow: 0 0 10px rgba(249, 115, 22, 0.1);
+}
+
+.glow-tag-success {
+  color: #10b981;
+  background-color: rgba(16, 185, 129, 0.08);
+  border: 1px solid rgba(16, 185, 129, 0.2);
+}
+
+/* Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: var(--background);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--border);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--teal-glow);
+}
